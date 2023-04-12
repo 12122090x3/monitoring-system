@@ -76,7 +76,8 @@ services:
       - '--config.file=/config/alertmanager.yml'
     depends_on:
       - prometheus
-
+    networks:
+      - monitoring
   grafana:
     image: grafana/grafana
     container_name: grafana
