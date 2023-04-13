@@ -1,14 +1,14 @@
 route:
-  receiver: 'mail'
+  receiver: 'gmail-notifications'
   repeat_interval: 4h
   group_by: [ 'alertname' ]
 
 
 receivers:
-  - name: 'mail'
+  - name: 'gmail-notifications'
     email_configs:
-      - smarthost: 'smtp.gmail.com:465'
-        auth_username: '12122090x3@gmail.com'
-        auth_password: "xxxx"
-        from: '12122090x3@gmail.com'
-        to: '12122090x2@gmail.com'
+      - smarthost: 'smtp.gmail.com:587'
+        auth_username: '12122090x1@gmail.com'
+        auth_password: "mwenjkqjjtshsths"
+        from: '12122090x1@gmail.com'
+        to: '12122090x3@gmail.com'

@@ -2,7 +2,7 @@ groups:
 - name: Windows-alert
   rules:
   - alert: Memory Usage High
-    expr: 100*(windows_cs_physical_memory_bytes)*0 < 1
+    expr: 100 - 100 * windows_os_physical_memory_free_bytes / windows_cs_physical_memory_bytes > 90
     for: 1m
     labels:
       severity: warning
@@ -45,3 +45,12 @@ groups:
     annotations:
       summary: "Collector Error (instance {{ $labels.instance }})"
       description: "Collector {{ $labels.collector }} was not successful\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+  - alert: NetInterfaceUsage
+    expr: rate(windows_net_bytes_total[2m]) / windows_net_current_bandwidth_bytes * 100 > 95
+    for: 1m
+    labels:
+      severity: high
+    annotations:
+      summary: "Network Interface Usage (instance {{ $labels.instance }})"
+      description: "Network traffic usage is greater than 95% for interface {{ $labels.nic }}\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
